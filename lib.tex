@@ -1,0 +1,75 @@
+\documentclass[tikz,border=10pt]{standalone}
+\usepackage{verbatim}
+\usepackage{calc}
+\usepackage[utf8]{inputenc}         % Umlaute etc.
+\usepackage[T1]{fontenc}            % T1-kodierte Fonts
+\usepackage{ae,aecompl}             % Kodierung für PDF
+\usepackage{ngerman}                % Deutsche Trennungen,
+\usepackage{intcalc}
+\usepackage{amsmath}
+\usepackage{tikz}
+
+\usetikzlibrary{positioning,shapes, shapes.geometric}
+
+\pgfmathsetbasenumberlength{4}
+\def\ns{\nodepart{second}}
+\def\ns{\nodepart{third}}
+
+\tikzset{
+  up/.style = {
+    fill=red
+  },
+  struc/.style = {
+    font=\scriptsize\sffamily, 
+    rectangle split,
+    rectangle split parts=3,
+    rectangle split part fill={\topFillColor,\middleFillColor,\bottomFillColor},
+    %rectangle split part draw={red,white,blue},
+    minimum height = 2.5cm,
+    minimum width=3cm,
+    inner sep=1pt,
+    text width= 3cm,
+    align=center,
+    inner sep=0.15cm,
+    %font=\scriptsize\bfseries,
+    draw,
+    fill=#1
+    },
+  struc/.default=none
+}
+
+
+% Settings
+
+
+\newenvironment
+  {storyMap}
+  {
+    \newcounter{LastStep}
+    \setcounter{LastStep}{0}
+    \newcounter{StepNumber}
+    \newcommand{\story}[2]
+    {
+      
+      \addtocounter{StepNumber}{1}
+      \node [struc,x=0cm,y=-1cm] at ({\intcalcMod{\theStepNumber-1}{\boxesPerRow} * 4.5cm},{floor(\theLastStep / \boxesPerRow) - 1)*-4cm}) (step\theStepNumber) {Schritt \theStepNumber \nodepart{second} ##2 \nodepart{third} ##1 }  ;
+      
+      \ifnum\theStepNumber=1
+      \else
+	\ifnum\intcalcMod{\theStepNumber-1}{\boxesPerRow} = 0
+	  \draw [->, very thick] (step\theLastStep) -- ++(2.5cm,0) -- ++(0,-2) -|  (step\theStepNumber);
+	\else
+	  \draw [->, very thick] (step\theLastStep) -- (step\theStepNumber);
+	\fi
+      \fi
+       \addtocounter{LastStep}{1}
+      ;
+      
+    }
+    \begin{tikzpicture}[node distance=2cm]
+    
+  }
+  {
+    \end{tikzpicture}
+  }
+
