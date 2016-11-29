@@ -1,0 +1,25 @@
+{
+  "name": "use-case-maps",
+  "version": "1.0.0",
+  "description": "Tool to easily create use case maps",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SteffenPegenau/use-case-maps.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SteffenPegenau/use-case-maps/issues"
+  },
+  "homepage": "https://github.com/SteffenPegenau/use-case-maps#readme",
+  "dependencies": {
+    "grunt": "~0.4.1",
+    "grunt-cli": "^1.2.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-execute": "^0.2.2"
+  }
+}
